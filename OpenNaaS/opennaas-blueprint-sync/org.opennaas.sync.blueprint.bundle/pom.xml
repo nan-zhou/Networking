@@ -1,0 +1,51 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.opennaas</groupId>
+    <artifactId>org.opennaas.sync.blueprint</artifactId>
+    <version>1.0.0</version>
+  </parent>
+  <artifactId>org.opennaas.sync.blueprint.bundle</artifactId>
+  <packaging>bundle</packaging>
+  <name>OpenNaaS :: dOSGI - Sync Blueprint :: Bundle</name>
+ 
+  <dependencies>
+		<!-- REST annotations -->
+		<dependency>
+			<groupId>org.apache.servicemix.specs</groupId>
+			<artifactId>org.apache.servicemix.specs.jsr311-api-1.1</artifactId>
+		</dependency>	
+ 		<!-- OSGI -->
+ 		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.core</artifactId>
+		</dependency> 
+		<!-- LOGGING -->
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+		</dependency>
+  
+  </dependencies>
+  <build>
+  	<plugins>
+  		<plugin>
+			<groupId>org.ops4j</groupId>
+			<artifactId>maven-pax-plugin</artifactId>
+		</plugin>
+  		<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Bundle-Activator>org.opennaas.sync.blueprint.bundle.Activator</Bundle-Activator>	
+					</instructions>			
+				</configuration>
+		</plugin>
+	</plugins>			
+ </build>			
+</project>  
+  
+  
+</project>

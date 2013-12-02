@@ -1,0 +1,45 @@
+Project to reproduce error exporting WS trough DOSGI after activating blueprint sync mode.
+
+
+Project is based on two main bundles. 
+
+- Sync Blueprint Bundle: declare two services (serviceA and serviceB) that are exported by dOSGi through a RESTful WS.
+- Sync Blueprint Feature: declate all dependencies to be installed in karaf in order to boot the Sync Blueprint bundle.
+
+
+Requirements
+------------
+
+- Apache Servicemix 4.5.2 
+
+
+Steps
+-----
+
+1) Compile the whole project
+
+	$ mvn install
+
+2) Edit karaf features of servicemix distribution (etc/org.apache.karaf.features.cfg) to only boot following featuers on startup.
+
+	featuresBoot=config,ssh,management
+
+3) Edit etc/config.properties file to activate blueprint sync mode.
+
+	org.apache.aries.blueprint.synchronous=true
+
+4) Start karaf and add the new repo to install the bundle
+
+	$ bin/karaf
+	
+	karaf@root> features:addurl mvn:org.opennaas/org.opennaas.sync.blueprint.features/1.0.0/xml/features
+
+	karaf@root> features:install opennaas-sync-blueprint
+
+5) Check that the services are exported via WS in following URLs
+
+	http://localhost:[port_number]/opennaas/serviceA?_wadl
+	http://localhost:[port_number]/opennaas/serviceA?_wadl
+
+
+Error appears intermittently, so if both of them are exported, reboot karaf until you see one of them fails.
